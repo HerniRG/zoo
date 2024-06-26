@@ -79,7 +79,7 @@ while True:
         try:
             edad = int(edad)
             if edad < 0:
-                    raise ValueError("No puede ser edad negativa.")
+                raise ValueError("Error: No puede ser edad negativa.")
             for tipo, valor in tipos_entrada.items():
                 if edad < valor["EDAD"]:
                     valor["CONTADOR"] += 1
