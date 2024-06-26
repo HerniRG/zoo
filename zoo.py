@@ -16,7 +16,7 @@ Debes asegurarte de que la edad sea un número entro y positivo.
 """
 
 """
-Documentación justificación texto Python https://docs.python.org/es/3/tutorial/inputoutput.html
+Documentación Justificación Texto Python https://docs.python.org/es/3/tutorial/inputoutput.html
 Comando borrado pantalla (buscado en google): os.system('cls' if os.name == 'nt' else 'clear')
 """
 
@@ -71,7 +71,7 @@ print("Bievenido al Zoo IS101\n")
 
 # inicio bucle, peticion edades y suma contadores
 while True:
-    edad = input("Edad: ")
+    edad = input("Edad (pulsa enter para finalizar): ")
     borrar_pantalla()
     if edad == "":
         break
