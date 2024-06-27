@@ -25,8 +25,8 @@ def print_cabecera():
 
 def verificar_edad(edad):
     """
-    devolveremos una tupla, primera parte de la tupla será bool edad_Valida y
-    edad_int será un int edad (positivo o negativo) y None para un ValuError
+    devolveremos una tupla, primera parte de la tupla (bool or None): Indica si la edad introducida es válida (True), inválida (False) o se ha finalizado el programa (None).
+    y segunda parte (int or None): Edad convertida a entero si es válida, a entero negativo si es negativa, o None si no se introdujo ninguna edad válida.
     """
 
     edadVerificada = (False, None)
@@ -70,6 +70,11 @@ def procesar_edad(edad_Valida, edad_int, tipos_entrada):
 
 
 def resumen_parcial(tipos_entrada):
+    """
+    Recorre tipos_entrada y simplemente verifica si contador es mayor que 0 lo añade a lista 
+    para despues mostrar información de como va la compra de entradas
+    """
+
     entradas = [] 
         
     for tipo, valores in tipos_entrada.items():
@@ -85,7 +90,12 @@ def resumen_parcial(tipos_entrada):
     return f"\nLlevas: {resumen}"
 
 def imprimir_ticket(tipos_entrada):
+    """
+    recorre tipos_entrada e imprime ticket, 
+    tambien se tiene en cuenta si no se ha comprado ningún ticket
+    """
     total = 0
+    borrar_pantalla()
     print_cabecera()
     print("\tTICKET ZOO IS101\n")
     for tipo, valores in tipos_entrada.items():
