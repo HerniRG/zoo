@@ -1,31 +1,7 @@
-"""
-Enunciado 
+# Importar funciones del archivo zoo_funciones
+from zoo_funciones import *
 
-Un zoo fija el precio de la entrada según la edad del visitante, así:
-
-    los niños de 2 años o menos no pagan
-    los niños de 3 a 12 pagan 14$
-    A partir de los 13 años se considera entrada de adulto por un valor de 23$
-    Los jubilados, 65 o más años pagan 18$
-
-Debes hacer un programa que pida las edades del grupo que va a visitar el zoo y devolver el precio del grupo y el detalle por edades.
-
-El programa devolverá el cálculo y el detalle cuando no se introduzcan más edades, es decir, se introduzca ''.
-
-Debes asegurarte de que la edad sea un número entro y positivo.
-"""
-
-"""
-Documentación Justificación Texto Python https://docs.python.org/es/3/tutorial/inputoutput.html
-Comando borrado pantalla (buscado en google): os.system('cls' if os.name == 'nt' else 'clear')
-"""
-
-import os
-
-# iniciar edad
-edad = 0
-
-# diccionario entradas zoo
+# Diccionario de tipos de entrada
 tipos_entrada = {
     "BEBE": {"EDAD": 3, "PRECIO": 0, "CONTADOR": 0},
     "NIÑO": {"EDAD": 13, "PRECIO": 14, "CONTADOR": 0},
@@ -33,63 +9,39 @@ tipos_entrada = {
     "JUBILADO": {"EDAD": float('inf'), "PRECIO": 18, "CONTADOR": 0}
 }
 
-# funciones
-def borrar_pantalla():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-def resumen_parcial(tipos_entrada):
-    entradas = [] 
-
-    for tipo, valores in tipos_entrada.items():
-        if valores['CONTADOR'] > 0:
-            entrada = f"{valores['CONTADOR']} de {tipo}"
-            entradas.append(entrada)
+# Función
+def procesar_edad_valida(edad_Valida, edad_int, tipos_entrada):
+    """
+    edad_Valida (bool or None): Indica si la edad introducida es válida (True), inválida (False) o se ha finalizado el programa (None).
+    edad_int (int or None): Edad convertida a entero si es válida, a entero negativo si es negativa, o None si no se introdujo ninguna edad.
+    tipos_entrada (diccionario): Diccionario que contiene los tipos de entrada al zoo con sus respectivos límites de edad, precios y contadores.
+    """
+    if edad_Valida:
+        for tipo, valor in tipos_entrada.items():
+            if edad_int < valor["EDAD"]:
+                valor["CONTADOR"] += 1
+                break
+    print_cabecera()
+    print(resumen_parcial(tipos_entrada))
     
-    resumen = ", ".join(entradas)
-    
-    return f"Llevas: {resumen}\n"
-
-def imprimir_ticket():
-    total = 0
-    print("TICKET ZOO IS101\n")
-    for tipo, valores in tipos_entrada.items():
-            if valores['CONTADOR'] > 0:
-                subtotal = valores['CONTADOR'] * valores['PRECIO']
-                print(f"{valores['CONTADOR']} de {tipo:<8}: {subtotal:7.2f} Euros") 
-                total += subtotal 
-    if total > 0:
-        print("_"*28)
-        print(f"Total: {total:15.2f} Euros")
-    else:
-        print("No hay entradas seleccionadas.")
-         
+    if not edad_Valida and edad_int != None:
+        print("\nError: No puede ser edad negativa.")
+    elif not edad_Valida:
+        print("\nError: Edad introducida no válida.")
 
 
-# cabecera programa
-borrar_pantalla()
-print("Bievenido al Zoo IS101\n")
+# Cabecera del programa
+print_cabecera()
 
-# inicio bucle, peticion edades y suma contadores
+# Inicio del bucle para pedir edades
 while True:
-    edad = input("Edad (pulsa enter para finalizar): ")
-    borrar_pantalla()
-    if edad == "":
+    edad = input("\nEdad (pulsa enter para finalizar): ")
+    edad_Valida, edad_int = verificar_edad(edad)
+    if edad_Valida is None:
         break
     else:
-        try:
-            edad = int(edad)
-            if edad < 0:
-                raise ValueError("Error: No puede ser edad negativa.")
-            for tipo, valor in tipos_entrada.items():
-                if edad < valor["EDAD"]:
-                    valor["CONTADOR"] += 1
-                    break            
+        procesar_edad_valida(edad_Valida, edad_int, tipos_entrada)
 
-            print(resumen_parcial(tipos_entrada))
-            
-        except:
-            print("Error: Edad introducida no válida.\n")
-
-# muestra de información por pantalla
+# Mostrar la información final por pantalla
 borrar_pantalla()
-imprimir_ticket()
+imprimir_ticket(tipos_entrada)
