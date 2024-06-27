@@ -94,17 +94,20 @@ def imprimir_ticket(tipos_entrada):
     recorre tipos_entrada e imprime ticket, 
     tambien se tiene en cuenta si no se ha comprado ningún ticket
     """
-    total = 0
+    total_euros = 0
+    total_tickets = 0 # He creado este porque se puede comprar X entradas a bebes y valer el total 0€. Para imprimir ticket en el caso de solo bebé
+    
     borrar_pantalla()
     print_cabecera()
     print("\tTICKET ZOO IS101\n")
     for tipo, valores in tipos_entrada.items():
             if valores['CONTADOR'] > 0:
                 subtotal = valores['CONTADOR'] * valores['PRECIO']
-                print(f"\t{valores['CONTADOR']} de {tipo:<8}: {subtotal:7.2f} Euros") 
-                total += subtotal 
-    if total > 0:
+                total_tickets += valores['CONTADOR']
+                print(f"\t{valores['CONTADOR']} de {tipo:<8}: {subtotal:7.2f} €") 
+                total_euros += subtotal 
+    if total_tickets > 0:
         print("\t____________________________")
-        print(f"\tTotal: {total:15.2f} Euros.\n")
+        print(f"\tTotal: {total_euros:15.2f} €\n")
     else:
         print("\tNo hay entradas seleccionadas.\n")
