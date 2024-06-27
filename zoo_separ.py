@@ -9,27 +9,6 @@ tipos_entrada = {
     "JUBILADO": {"EDAD": float('inf'), "PRECIO": 18, "CONTADOR": 0}
 }
 
-# Función
-def procesar_edad_valida(edad_Valida, edad_int, tipos_entrada):
-    """
-    edad_Valida (bool or None): Indica si la edad introducida es válida (True), inválida (False) o se ha finalizado el programa (None).
-    edad_int (int or None): Edad convertida a entero si es válida, a entero negativo si es negativa, o None si no se introdujo ninguna edad.
-    tipos_entrada (diccionario): Diccionario que contiene los tipos de entrada al zoo con sus respectivos límites de edad, precios y contadores.
-    """
-    if edad_Valida:
-        for tipo, valor in tipos_entrada.items():
-            if edad_int < valor["EDAD"]:
-                valor["CONTADOR"] += 1
-                break
-    print_cabecera()
-    print(resumen_parcial(tipos_entrada))
-    
-    if not edad_Valida and edad_int != None:
-        print("\nError: No puede ser edad negativa.")
-    elif not edad_Valida:
-        print("\nError: Edad introducida no válida.")
-
-
 # Cabecera del programa
 print_cabecera()
 
@@ -37,10 +16,10 @@ print_cabecera()
 while True:
     edad = input("\nEdad (pulsa enter para finalizar): ")
     edad_Valida, edad_int = verificar_edad(edad)
-    if edad_Valida is None:
+    if edad_Valida is None: # he puesto None si pulsamos "" (intro)
         break
     else:
-        procesar_edad_valida(edad_Valida, edad_int, tipos_entrada)
+        tipos_entrada = procesar_edad(edad_Valida, edad_int, tipos_entrada)
 
 # Mostrar la información final por pantalla
 borrar_pantalla()

@@ -38,7 +38,28 @@ def verificar_edad(edad):
     
     return edadVerificada
 
-
+def procesar_edad(edad_Valida, edad_int, tipos_entrada):
+    """
+    edad_Valida (bool or None): Indica si la edad introducida es válida (True), inválida (False) o se ha finalizado el programa (None).
+    edad_int (int or None): Edad convertida a entero si es válida, a entero negativo si es negativa, o None si no se introdujo ninguna edad.
+    tipos_entrada (diccionario): Diccionario que contiene los tipos de entrada al zoo con sus respectivos límites de edad, precios y contadores.
+    devuelve tipos de entrada ya procesado
+    """
+    procesado_tipos_entrada = tipos_entrada
+    if edad_Valida:
+        for tipo, valor in procesado_tipos_entrada.items():
+            if edad_int < valor["EDAD"]:
+                valor["CONTADOR"] += 1
+                break
+    print_cabecera()
+    print(resumen_parcial(procesado_tipos_entrada))
+    
+    if not edad_Valida and edad_int != None:
+        print("\nError: No puede ser edad negativa.")
+    elif not edad_Valida:
+        print("\nError: Edad introducida no válida.")
+    
+    return procesado_tipos_entrada
 
 
 def resumen_parcial(tipos_entrada):
