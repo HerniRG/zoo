@@ -1,6 +1,13 @@
 # funciones
 import os
 
+"""
+las tonterias como borrar_pantalla que parece un poco raro
+simplemente lo miré por google y
+la justificación del texto para mostrarlo en pantalla lo miré en
+Documentación Justificación Texto Python https://docs.python.org/es/3/tutorial/inputoutput.html
+"""
+
 
 def borrar_pantalla():
     os.system('cls' if os.name == 'nt' else 'clear')
