@@ -17,7 +17,7 @@ def main():
     while True:
         edad = input("\nEdad (pulsa enter para finalizar): ")
         edad_Valida, edad_int = verificar_edad(edad)
-        if edad_Valida is None: # entra aqui poque verificar edad marca como None al pulsar enter ""
+        if edad_Valida is None: # entra aqui porque verificar_edad marca None si usuario pulsa enter ""
             break
         else:
             tipos_entrada = procesar_edad(edad_Valida, edad_int, tipos_entrada)
