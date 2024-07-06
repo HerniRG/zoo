@@ -1,5 +1,6 @@
 # funciones
 import os
+from simple_screen import Print, locate, Input, cls
 
 """
 las tonterias como borrar_pantalla que parece un poco raro

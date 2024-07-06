@@ -1,8 +1,8 @@
 # Importar funciones del archivo zoo_funciones
 from zoo_funciones import *
-from simple_screen import Screen_manager
+from simple_screen import Screen_manager, locate
 
-with Screen_manager() as sc:
+with Screen_manager as sc:
 
     def main():
         # Diccionario de tipos de entrada
