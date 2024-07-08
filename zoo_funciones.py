@@ -3,15 +3,13 @@ import os
 from simple_screen import Print, locate, Input, cls
 
 """
-las tonterias como borrar_pantalla que parece un poco raro
-simplemente lo miré por google y
 la justificación del texto para mostrarlo en pantalla lo miré en
 Documentación Justificación Texto Python https://docs.python.org/es/3/tutorial/inputoutput.html
 """
 
 
 def borrar_pantalla():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    cls()
 
 def print_cabecera():
     borrar_pantalla()
@@ -22,7 +20,7 @@ def print_cabecera():
     *                                 *
     ***********************************
     """
-    print(cabecera)
+    Print(cabecera)
 
 def verificar_edad(edad):
     """
@@ -60,12 +58,12 @@ def procesar_edad(edad_Valida, edad_int, tipos_entrada):
                 valor["CONTADOR"] += 1
                 break
     print_cabecera()
-    print(resumen_parcial(procesado_tipos_entrada))
+    Print(resumen_parcial(procesado_tipos_entrada))
     
     if not edad_Valida and edad_int != None:
-        print("\nError: No puede ser edad negativa.")
+        Print("\nError: No puede ser edad negativa.")
     elif not edad_Valida:
-        print("\nError: Edad introducida no válida.")
+        Print("\nError: Edad introducida no válida.")
     
     return procesado_tipos_entrada
 
@@ -100,15 +98,15 @@ def imprimir_ticket(tipos_entrada):
     
     borrar_pantalla()
     print_cabecera()
-    print("\tTICKET ZOO IS101\n")
+    Print("\tTICKET ZOO IS101\n")
     for tipo, valores in tipos_entrada.items():
             if valores['CONTADOR'] > 0:
                 subtotal = valores['CONTADOR'] * valores['PRECIO']
                 total_tickets += valores['CONTADOR']
-                print(f"\t{valores['CONTADOR']} de {tipo:<8}: {subtotal:7.2f} €") 
+                Print(f"\t{valores['CONTADOR']} de {tipo:<8}: {subtotal:7.2f} €") 
                 total_euros += subtotal 
     if total_tickets > 0:
-        print("\t____________________________")
-        print(f"\tTotal: {total_euros:15.2f} €\n")
+        Print("\t____________________________")
+        Print(f"\tTotal: {total_euros:15.2f} €\n")
     else:
-        print("\tNo hay entradas seleccionadas.\n")
+        Print("\tNo hay entradas seleccionadas.\n")
